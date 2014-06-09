@@ -1,28 +1,9 @@
 // use std::io::BufferedReader;
 // use std::io::println;
 // use std::io;
-
+mod token;
 enum ParseStates {
     StartState
-}
-
-enum TokenType {
-    NUMBER,
-    PLUS,
-    MINUS,
-    STAR,
-    SLASH
-}
-
-struct Token {
-    value: std::string::String,
-    toktype: TokenType
-}
-
-impl std::fmt::Show for Token {
-    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "{}", self.value)
-    }
 }
 
 fn main() {
@@ -42,59 +23,59 @@ fn main() {
                 match c {
                     '0' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '1' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '2' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '3' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '4' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '5' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '6' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '7' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '8' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '9' => {
                         println!("NUMBER");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: NUMBER});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
                     },
                     '+' => {
                         println!("PLUS");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: PLUS});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::PLUS});
                     },
                     '-' => {
                         println!("MINUS");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: MINUS});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::MINUS});
                     },
                     '*' => {
                         println!("STAR");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: STAR});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::STAR});
                     },
                     '/' => {
                         println!("SLASH");
-                        all_tokens.push(Token{value: std::str::from_char(c), toktype: SLASH});
+                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::SLASH});
                     },
                     _ => { /* ignore everything else */ }
                 }
