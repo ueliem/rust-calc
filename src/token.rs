@@ -6,13 +6,22 @@ pub enum TokenType {
     SLASH
 }
 
-pub struct Token {
-    pub value: ::std::string::String,
+pub struct Token<'a> {
+    pub value: &'a str,
     pub toktype: TokenType
 }
 
-impl ::std::fmt::Show for Token {
+impl<'a> ::std::fmt::Show for Token<'a> {
     fn fmt(&self, f: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         write!(f, "{}", self.value)
+    }
+}
+
+impl<'a> Token<'a> {
+    pub fn is_terminal(&self) -> bool {
+        return match self.toktype {
+            NUMBER => true,
+            _ => false
+        }
     }
 }

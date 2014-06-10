@@ -2,6 +2,7 @@
 // use std::io::println;
 // use std::io;
 mod token;
+mod mathparse;
 enum ParseStates {
     StartState
 }
@@ -15,67 +16,69 @@ fn main() {
     // let mut accumulator = 0;
     let current_state = StartState;
     // let mut current_token_value: std::string::String;
+    let mut current_token_start: int;
+    let mut current_token_end: int;
     let mut all_tokens = Vec::new();
 
-    for c in program.chars() {
+    for i in range(0, program.len()) {
         match current_state {
             StartState => {
-                match c {
-                    '0' => {
+                match program[i] {
+                    48_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '1' => {
+                    49_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '2' => {
+                    50_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '3' => {
+                    51_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '4' => {
+                    52_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '5' => {
+                    53_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '6' => {
+                    54_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '7' => {
+                    55_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '8' => {
+                    56_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '9' => {
+                    57_u8 => {
                         println!("NUMBER");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::NUMBER});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
-                    '+' => {
+                    43_u8 => {
                         println!("PLUS");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::PLUS});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::PLUS});
                     },
-                    '-' => {
+                    45_u8 => {
                         println!("MINUS");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::MINUS});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::MINUS});
                     },
-                    '*' => {
+                    42_u8 => {
                         println!("STAR");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::STAR});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::STAR});
                     },
-                    '/' => {
+                    47_u8 => {
                         println!("SLASH");
-                        all_tokens.push(token::Token{value: std::str::from_char(c), toktype: token::SLASH});
+                        all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::SLASH});
                     },
                     _ => { /* ignore everything else */ }
                 }
@@ -84,4 +87,5 @@ fn main() {
     }
     // println!("{}", accumulator);
     println!("{}", all_tokens);
+    println!("{}", mathparse::parse(all_tokens));
 }
