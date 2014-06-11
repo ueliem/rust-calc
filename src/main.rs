@@ -11,8 +11,8 @@ fn main() {
     // println!("Hello World!");
     // println!("{}", &input);
     //let program = "1 + 1";
-    let program = "2 + 2 - 3";
-    let mut all_tokens = tokenize::tokenize(program);
-    //println!("{}", all_tokens);
+    let program = "22 - 2 + 3\n";
+    let all_tokens = tokenize::tokenize(program);
+    println!("{}", all_tokens);
     println!("{}", mathparse::parse(all_tokens));
 }
