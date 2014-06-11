@@ -124,24 +124,9 @@ pub fn parse_plus(left: int, right: int) -> int {
 }
 
 pub fn parse_minus(left: int, right: int) -> int {
-    println!("Subtarcting {} with {}", left, right);
+    println!("Subtracting {} with {}", left, right);
     return left - right;
 }
-
-// pub fn parse_star(left: fn() -> int, right: fn() -> int) -> int {
-//     return left() * right();
-// }
-//
-// pub fn parse_slash(left: fn() -> int, right: fn() -> int) -> int {
-//     return left() / right();
-// }
-// pub fn parse_plus(left: fn() -> int, right: fn() -> int) -> int {
-//     return left() + right();
-// }
-//
-// pub fn parse_minus(left: fn() -> int, right: fn() -> int) -> int {
-//     return left() - right();
-// }
 
 pub fn parse_number(numstr: ::std::string::String) -> int {
     match from_str::<int>(numstr.as_slice()) {
