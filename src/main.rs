@@ -12,7 +12,8 @@ fn main() {
     // let input = reader.read_line().unwrap();
     // println!("Hello World!");
     // println!("{}", &input);
-    let program = "1 + 1";
+    //let program = "1 + 1";
+    let program = "2 + 2 - 3";
     // let mut accumulator = 0;
     let current_state = StartState;
     // let mut current_token_value: std::string::String;
@@ -25,59 +26,59 @@ fn main() {
             StartState => {
                 match program[i] {
                     48_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     49_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     50_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     51_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     52_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     53_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     54_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     55_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     56_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     57_u8 => {
-                        println!("NUMBER");
+                        //println!("NUMBER");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::NUMBER});
                     },
                     43_u8 => {
-                        println!("PLUS");
+                        //println!("PLUS");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::PLUS});
                     },
                     45_u8 => {
-                        println!("MINUS");
+                        //println!("MINUS");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::MINUS});
                     },
                     42_u8 => {
-                        println!("STAR");
+                        //println!("STAR");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::STAR});
                     },
                     47_u8 => {
-                        println!("SLASH");
+                        //println!("SLASH");
                         all_tokens.push(token::Token{value: program.slice(i,i+1), toktype: token::SLASH});
                     },
                     _ => { /* ignore everything else */ }
@@ -86,6 +87,6 @@ fn main() {
         }
     }
     // println!("{}", accumulator);
-    println!("{}", all_tokens);
+    //println!("{}", all_tokens);
     println!("{}", mathparse::parse(all_tokens));
 }

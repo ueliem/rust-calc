@@ -1,15 +1,8 @@
 pub fn parse(tokens: Vec<::token::Token>) -> int {
     let mut accumulator = 0;
-
-    for i in range(0, tokens.len()) {
-        match tokens.get(i).toktype {
-            ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-            _ => continue
-        }
-    }
     for i in range(0, tokens.len()) {
             match tokens.get(i).toktype {
-            ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+            ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
             _ => continue
         }
     }
@@ -21,11 +14,17 @@ pub fn parse(tokens: Vec<::token::Token>) -> int {
     }
     for i in range(0, tokens.len()) {
             match tokens.get(i).toktype {
-            ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+            ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
             _ => continue
         }
     }
-    return -1;
+    for i in range(0, tokens.len()) {
+        match tokens.get(i).toktype {
+            ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+            _ => continue
+        }
+    }
+    return 5000;
 }
 
 pub fn getleft(tokens: &[::token::Token<>]) -> int {
@@ -39,7 +38,34 @@ pub fn getleft(tokens: &[::token::Token<>]) -> int {
             _ => {  }
         }
     }
-    return 0;
+    else {
+        for i in range(0, tokens.len()) {
+                match tokens[i].toktype {
+                ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        for i in range(0, tokens.len()) {
+                match tokens[i].toktype {
+                ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        for i in range(0, tokens.len()) {
+                match tokens[i].toktype {
+                ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        for i in range(0, tokens.len()) {
+            match tokens[i].toktype {
+                ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        return 5000;
+    }
+    return 5000;
 }
 
 pub fn getright(tokens: &[::token::Token<>]) -> int {
@@ -53,21 +79,52 @@ pub fn getright(tokens: &[::token::Token<>]) -> int {
             _ => {  }
         }
     }
-    return 0;
+    else {
+        for i in range(0, tokens.len()) {
+                match tokens[i].toktype {
+                ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        for i in range(0, tokens.len()) {
+                match tokens[i].toktype {
+                ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        for i in range(0, tokens.len()) {
+                match tokens[i].toktype {
+                ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        for i in range(0, tokens.len()) {
+            match tokens[i].toktype {
+                ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                _ => continue
+            }
+        }
+        return 5000;
+    }
+    return 5000;
 }
 
 pub fn parse_star(left: int, right: int) -> int {
+    println!("Multiplying {} by {}", left, right);
     return left * right;
 }
 
 pub fn parse_slash(left: int, right: int) -> int {
+    println!("Dividing {} by {}", left, right);
     return left / right;
 }
 pub fn parse_plus(left: int, right: int) -> int {
+    println!("Adding {} and {}", left, right);
     return left + right;
 }
 
 pub fn parse_minus(left: int, right: int) -> int {
+    println!("Subtarcting {} with {}", left, right);
     return left - right;
 }
 
