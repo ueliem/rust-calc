@@ -23,6 +23,8 @@ impl<'a> Token<'a> {
     pub fn is_terminal(&self) -> bool {
         return match self.toktype {
             NUMBER => true,
+            LPAREN => true,
+            RPAREN => true,
             _ => false
         }
     }
