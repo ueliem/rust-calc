@@ -2,25 +2,15 @@ pub fn parse(tokens: Vec<::token::Token>) -> int {
     let mut accumulator = 0;
     for i in range(0, tokens.len()) {
             match tokens.get(i).toktype {
+            ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
             ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
             _ => continue
         }
     }
     for i in range(0, tokens.len()) {
             match tokens.get(i).toktype {
-            ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-            _ => continue
-        }
-    }
-    for i in range(0, tokens.len()) {
-            match tokens.get(i).toktype {
-            ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-            _ => continue
-        }
-    }
-    for i in range(0, tokens.len()) {
-        match tokens.get(i).toktype {
             ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+            ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
             _ => continue
         }
     }
@@ -41,25 +31,15 @@ pub fn getleft(tokens: &[::token::Token<>]) -> int {
     else {
         for i in range(0, tokens.len()) {
                 match tokens[i].toktype {
+                ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
                 ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
                 _ => continue
             }
         }
         for i in range(0, tokens.len()) {
                 match tokens[i].toktype {
-                ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-                _ => continue
-            }
-        }
-        for i in range(0, tokens.len()) {
-                match tokens[i].toktype {
-                ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-                _ => continue
-            }
-        }
-        for i in range(0, tokens.len()) {
-            match tokens[i].toktype {
                 ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
                 _ => continue
             }
         }
@@ -82,25 +62,15 @@ pub fn getright(tokens: &[::token::Token<>]) -> int {
     else {
         for i in range(0, tokens.len()) {
                 match tokens[i].toktype {
+                ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
                 ::token::MINUS => return parse_minus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
                 _ => continue
             }
         }
         for i in range(0, tokens.len()) {
                 match tokens[i].toktype {
-                ::token::PLUS => return parse_plus(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-                _ => continue
-            }
-        }
-        for i in range(0, tokens.len()) {
-                match tokens[i].toktype {
-                ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
-                _ => continue
-            }
-        }
-        for i in range(0, tokens.len()) {
-            match tokens[i].toktype {
                 ::token::STAR => return parse_star(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
+                ::token::SLASH => return parse_slash(getleft(tokens.slice_to(i)), getright(tokens.slice_from(i+1))),
                 _ => continue
             }
         }
