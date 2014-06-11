@@ -3,7 +3,9 @@ pub enum TokenType {
     PLUS,
     MINUS,
     STAR,
-    SLASH
+    SLASH,
+    LPAREN,
+    RPAREN
 }
 
 pub struct Token<'a> {
