@@ -21,6 +21,14 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                 println!("found minus {}", i);
                 return parse_minus(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
+            ::token::STAR => {
+                println!("found plus {}", i);
+                return parse_star(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
+            },
+            ::token::SLASH => {
+                println!("found minus {}", i);
+                return parse_slash(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
+            },
             ::token::RPAREN => {
                 println!("found right initial RPAREN {}", i);
                 let mut parencount: uint = 1;
@@ -51,8 +59,8 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                         }
                         for k in ::std::iter::range_step_inclusive(j as int, 0, (-1)) {
                             match tokens[(k as uint)].toktype {
-                                ::token::STAR => return parse_star(getleft(tokens.slice_to((k as uint)-1)), getright(tokens.slice_from((k as uint)+1))),
-                                ::token::SLASH => return parse_slash(getleft(tokens.slice_to((k as uint)-1)), getright(tokens.slice_from((k as uint)+1))),
+                                ::token::STAR => return parse_star(getleft(tokens.slice_to((k as uint))), getright(tokens.slice_from((k as uint)+1))),
+                                ::token::SLASH => return parse_slash(getleft(tokens.slice_to((k as uint))), getright(tokens.slice_from((k as uint)+1))),
                                 _ => continue
                             }
                         }
@@ -61,13 +69,6 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                     }
                 }
             },
-            _ => continue
-        }
-    }
-    for i in ::std::iter::range_step(count as int, 0, (-1)) {
-        match tokens[(i as uint)-1].toktype {
-            ::token::STAR => return parse_star(getleft(tokens.slice_to((i as uint)-1)), getright(tokens.slice_from(i as uint))),
-            ::token::SLASH => return parse_slash(getleft(tokens.slice_to((i as uint)-1)), getright(tokens.slice_from(i as uint))),
             _ => continue
         }
     }
