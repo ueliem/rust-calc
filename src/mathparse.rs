@@ -1,7 +1,7 @@
 pub fn parse(tokens: &[::token::Token<>]) -> int {
-    println!("Tokens: {}", tokens);
+    // println!("Tokens: {}", tokens);
     let count = tokens.len();
-    println!("count: {}", count);
+    // println!("count: {}", count);
     if tokens.len() == 1 && tokens[0].is_terminal() {
         match tokens[0].toktype {
             ::token::NUMBER => {
@@ -14,34 +14,52 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
     for i in ::std::iter::range_step_inclusive((count as int)-1, 0, (-1)) {
         match tokens[(i as uint)].toktype {
             ::token::PLUS => {
-                println!("found plus {}", i);
+                // println!("found plus {}", i);
                 return parse_plus(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
             ::token::MINUS => {
-                println!("found minus {}", i);
+                // println!("found minus {}", i);
                 return parse_minus(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
+            ::token::RPAREN => {
+                // println!("found right initial RPAREN {}", i);
+                break;
+            },
+            _ => continue
+        }
+    }
+    for i in ::std::iter::range_step_inclusive((count as int)-1, 0, (-1)) {
+        match tokens[(i as uint)].toktype {
             ::token::STAR => {
-                println!("found plus {}", i);
+                // println!("found star {}", i);
                 return parse_star(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
             ::token::SLASH => {
-                println!("found minus {}", i);
+                // println!("found slash {}", i);
                 return parse_slash(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
             ::token::RPAREN => {
-                println!("found right initial RPAREN {}", i);
+                // println!("found right initial RPAREN {}", i);
+                break;
+            },
+            _ => continue
+        }
+    }
+    for i in ::std::iter::range_step_inclusive((count as int)-1, 0, (-1)) {
+        match tokens[(i as uint)].toktype {
+            ::token::RPAREN => {
+                // println!("found right initial RPAREN {}", i);
                 let mut parencount: uint = 1;
                 for j in ::std::iter::range_step_inclusive(i-1, 0, (-1)) {
-                    println!("J {}", j);
+                    // println!("J {}", j);
                     match tokens[(j as uint)].toktype {
                         ::token::RPAREN => {
-                            println!("found RPAREN {}", (j as uint));
+                            // println!("found RPAREN {}", (j as uint));
                             parencount += 1_u;
                             // println!("parencount is {}", parencount);
                         },
                         ::token::LPAREN => {
-                            println!("found LPAREN {}", (j as uint));
+                            // println!("found LPAREN {}", (j as uint));
                             parencount -= 1_u;
                             // println!("parencount is {}", parencount);
                             //return parse(tokens.slice((j as uint), (i as uint)-1));
@@ -49,7 +67,7 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                         _ => continue
                     }
                     if parencount == 0_u {
-                        println!("parencount is zero");
+                        // println!("parencount is zero");
                         for k in ::std::iter::range_step_inclusive((j as int)-1, 0, (-1)) {
                             match tokens[(k as uint)].toktype {
                                 ::token::PLUS => return parse_plus(getleft(tokens.slice_to((k as uint))), getright(tokens.slice_from((k as uint)+1))),
@@ -64,7 +82,7 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                                 _ => continue
                             }
                         }
-                        println!("stripping outer parens");
+                        // println!("stripping outer parens");
                         return parse(tokens.slice(1_u, (tokens.len() as uint) - 1_u));
                     }
                 }
