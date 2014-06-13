@@ -11,7 +11,7 @@ fn main() {
     // println!("Hello World!");
     // println!("{}", &input);
     //let program = "1 + 1\n";
-    let program = "(22 - ((2 + 3) + 2))\n";
+    let program = "(22 - ((-3) + 2))\n";
     // let program = "(22 - (2 + 3) + 2)\n";
     let all_tokens = tokenize::tokenize(program);
     //println!("{}", all_tokens);

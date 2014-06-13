@@ -260,63 +260,63 @@ pub fn tokenize<'a>(tokenstring: &'a str) -> Vec<::token::Token<'a>> {
             MinusState => {
                 match tokenstring[i] {
                     48_u8 => {// 0 Zero
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     49_u8 => {// 1 One
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     50_u8 => {// 2 Two
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     51_u8 => {// 3 Three
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     52_u8 => {// 4 Four
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     53_u8 => {// 5 Five
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     54_u8 => {// 6 Six
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     55_u8 => {// 7 Seven
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     56_u8 => {// 8 Eight
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     57_u8 => {// 9 Nine
-                        current_token_end = i;
-                        all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
-                        current_token_start = i;
+                        // current_token_end = i;
+                        // all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::MINUS});
+                        // current_token_start = i;
                         current_state = NumberState;
                     },
                     43_u8 => {// + Plus
