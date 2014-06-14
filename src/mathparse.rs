@@ -2,13 +2,18 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
     // println!("Tokens: {}", tokens);
     let count = tokens.len();
     // println!("count: {}", count);
-    if tokens.len() == 1 && tokens[0].is_terminal() {
-        match tokens[0].toktype {
-            ::token::NUMBER => {
-                //println!("found terminal number {}", tokens[0]);
-                return parse_number(tokens[0].value.to_string());
-            },
-            _ => {  }
+    if tokens.len() == 1 {
+        if tokens[0].is_terminal() {
+            match tokens[0].toktype {
+                ::token::NUMBER => {
+                    //println!("found terminal number {}", tokens[0]);
+                    return parse_number(tokens[0].value.to_string());
+                },
+                _ => {  }
+            }
+        }
+        else {
+            fail!("Reached leaf of parse tree and found non-terminal token.");
         }
     }
     for i in ::std::iter::range_step_inclusive((count as int)-1, 0, (-1)) {
@@ -20,6 +25,10 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
             ::token::MINUS => {
                 // println!("found minus {}", i);
                 return parse_minus(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
+            },
+            ::token::LPAREN => {
+                // println!("found right initial RPAREN {}", i);
+                fail!("Encountered unpaired LPAREN token.");
             },
             ::token::RPAREN => {
                 // println!("found right initial RPAREN {}", i);
@@ -37,6 +46,10 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
             ::token::SLASH => {
                 // println!("found slash {}", i);
                 return parse_slash(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
+            },
+            ::token::LPAREN => {
+                // println!("found right initial RPAREN {}", i);
+                fail!("Encountered unpaired LPAREN token.");
             },
             ::token::RPAREN => {
                 // println!("found right initial RPAREN {}", i);
@@ -124,6 +137,6 @@ pub fn parse_number(numstr: ::std::string::String) -> int {
     match from_str::<int>(numstr.as_slice()) {
         Some(0) => {/*println!("Some(0)");*/ return 0;},
         Some(n) => {/*println!("Some(n)");*/ return n;},
-        None => {/*println!("None");*/ return -1;}
+        None => {fail!("Number failed to be parsed, or may not have been a number.");}
     }
 }
