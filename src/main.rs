@@ -14,12 +14,21 @@ fn main() {
         // let program = "1 + 1\n";
         // let program = "(22 - ((-3) * 2))\n";
         // let program = "(22 - (2 + 3) + 2)\n";
-        let all_tokens = tokenize::tokenize(input.as_slice());
+        //let all_tokens = tokenize::tokenize(input.as_slice());
+        match tokenize::tokenize(input.as_slice()) {
+            Some(n) => {
+                match mathparse::parse(n.as_slice()) {
+                    Some(m) => println!("{}", m),
+                    None => println!("There was some error!")
+                }
+            },
+            None => {
+                println!("There was some error!");
+                continue;
+            }
+        }
+
         //println!("{}", all_tokens);
         //println!("{}", mathparse::parse(all_tokens.as_slice()));
-        match mathparse::parse(all_tokens.as_slice()) {
-            Some(n) => println!("{}", n),
-            None => println!("There was some error!")
-        }
     }
 }

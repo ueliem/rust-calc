@@ -8,7 +8,7 @@ enum ParseStates {
     LParenState,
     RParenState
 }
-pub fn tokenize<'a>(tokenstring: &'a str) -> Vec<::token::Token<'a>> {
+pub fn tokenize<'a>(tokenstring: &'a str) -> Option<Vec<::token::Token<'a>>> {
     let mut current_state = StartState;
     let mut current_token_start: uint = 0;
     let mut current_token_end: uint = 0;
@@ -789,5 +789,5 @@ pub fn tokenize<'a>(tokenstring: &'a str) -> Vec<::token::Token<'a>> {
             }
         }
     }
-    return all_tokens;
+    return Some(all_tokens);
 }
