@@ -7,7 +7,7 @@ mod tokenize;
 
 fn main() {
     let mut reader = BufferedReader::new(io::stdin());
-    while true {
+    loop {
         let input = reader.read_line().unwrap();
         // println!("Hello World!");
         // println!("{}", &input);
@@ -17,6 +17,9 @@ fn main() {
         let all_tokens = tokenize::tokenize(input.as_slice());
         //println!("{}", all_tokens);
         //println!("{}", mathparse::parse(all_tokens.as_slice()));
-        println!("{}", mathparse::parse(all_tokens.as_slice()));
+        match mathparse::parse(all_tokens.as_slice()) {
+            Some(n) => println!("{}", n),
+            None => println!("There was some error!")
+        }
     }
 }

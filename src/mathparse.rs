@@ -1,4 +1,4 @@
-pub fn parse(tokens: &[::token::Token<>]) -> int {
+pub fn parse(tokens: &[::token::Token<>]) -> Option<int> {
     // println!("Tokens: {}", tokens);
     let count = tokens.len();
     // println!("count: {}", count);
@@ -9,11 +9,14 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                     //println!("found terminal number {}", tokens[0]);
                     return parse_number(tokens[0].value.to_string());
                 },
-                _ => {  }
+                _ => {
+                    return None;
+                }
             }
         }
         else {
-            fail!("Reached leaf of parse tree and found non-terminal token.");
+            println!("Reached leaf of parse tree and found non-terminal token.");
+            return None;
         }
     }
     for i in ::std::iter::range_step_inclusive((count as int)-1, 0, (-1)) {
@@ -27,8 +30,8 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                 return parse_minus(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
             ::token::LPAREN => {
-                // println!("found right initial RPAREN {}", i);
-                fail!("Encountered unpaired LPAREN token.");
+                println!("Encountered unpaired LPAREN token.");
+                return None;
             },
             ::token::RPAREN => {
                 // println!("found right initial RPAREN {}", i);
@@ -48,8 +51,8 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
                 return parse_slash(getleft(tokens.slice_to((i as uint))), getright(tokens.slice_from((i as uint)+1)));
             },
             ::token::LPAREN => {
-                // println!("found right initial RPAREN {}", i);
-                fail!("Encountered unpaired LPAREN token.");
+                println!("Encountered unpaired LPAREN token.");
+                return None;
             },
             ::token::RPAREN => {
                 // println!("found right initial RPAREN {}", i);
@@ -103,40 +106,64 @@ pub fn parse(tokens: &[::token::Token<>]) -> int {
             _ => continue
         }
     }
-    return 5000;
+    return None;
 }
 
-pub fn getleft(tokens: &[::token::Token<>]) -> int {
+pub fn getleft(tokens: &[::token::Token<>]) -> Option<int> {
     return parse(tokens);
 }
 
-pub fn getright(tokens: &[::token::Token<>]) -> int {
+pub fn getright(tokens: &[::token::Token<>]) -> Option<int> {
     return parse(tokens);
 }
 
-pub fn parse_star(left: int, right: int) -> int {
-    println!("Multiplying {} by {}", left, right);
-    return left * right;
+pub fn parse_star(left: Option<int>, right: Option<int>) -> Option<int> {
+    match (left, right) {
+        (Some(n),Some(m)) => {
+            println!("Multiplying {} by {}", left, right);
+            return Some(left.unwrap() * right.unwrap())
+        },
+        _ => return None
+    }
 }
 
-pub fn parse_slash(left: int, right: int) -> int {
-    println!("Dividing {} by {}", left, right);
-    return left / right;
+pub fn parse_slash(left: Option<int>, right: Option<int>) -> Option<int> {
+    match (left, right) {
+        (Some(n),Some(m)) => {
+            println!("Dividing {} by {}", left, right);
+            return Some(left.unwrap() / right.unwrap());
+        },
+        _ => return None
+    }
 }
-pub fn parse_plus(left: int, right: int) -> int {
-    println!("Adding {} and {}", left, right);
-    return left + right;
+pub fn parse_plus(left: Option<int>, right: Option<int>) -> Option<int> {
+    match (left, right) {
+        (Some(n),Some(m)) => {
+            println!("Adding {} and {}", left, right);
+            return Some(left.unwrap() + right.unwrap());
+        },
+        _ => return None
+    }
 }
 
-pub fn parse_minus(left: int, right: int) -> int {
-    println!("Subtracting {} with {}", left, right);
-    return left - right;
+pub fn parse_minus(left: Option<int>, right: Option<int>) -> Option<int> {
+    match (left, right) {
+        (Some(n),Some(m)) => {
+            println!("Subtracting {} with {}", left, right);
+            return Some(left.unwrap() - right.unwrap());
+        },
+        _ => return None
+    }
 }
 
-pub fn parse_number(numstr: ::std::string::String) -> int {
+pub fn parse_number(numstr: ::std::string::String) -> Option<int> {
     match from_str::<int>(numstr.as_slice()) {
-        Some(0) => {/*println!("Some(0)");*/ return 0;},
-        Some(n) => {/*println!("Some(n)");*/ return n;},
-        None => {fail!("Number failed to be parsed, or may not have been a number.");}
+        Some(n) => {
+            return Some(n);
+        },
+        None => {
+            println!("Number failed to be parsed, or may not have been a number.");
+            return None;
+        }
     }
 }
