@@ -51,9 +51,8 @@ pub fn tokenize<'a>(tokenstring: &'a str) -> Option<Vec<::token::Token<'a>>> {
             },
             NumberState => {
                 match tokenstring[i] {
-                    // 48_u8..57_u8 => {//0-9 zero to nine
-                    //     current_state = NumberState;
-                    // },
+                    48_u8..57_u8 => {//0-9 zero to nine
+                    },
                     43_u8 => {// + Plus
                         current_token_end = i;
                         all_tokens.push(::token::Token{value: tokenstring.slice(current_token_start,current_token_end), toktype: ::token::NUMBER});
